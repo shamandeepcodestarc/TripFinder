@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="./favicon.png" type="image/png" sizes="16x16" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+		<meta name="theme-color" content="#008489" />
+		<!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+		<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+		
+<!-- <script src="https://js.braintreegateway.com/js/braintree-2.32.1.min.js"></script> -->
+<!-- <script src="https://js.braintreegateway.com/web/3.55.0/js/apple-pay.min.js"></script> -->
+<script>
+
+<!-- const form = document.getElementById('payment-form'); -->
+
+<!-- braintree.dropin.create({ -->
+  <!-- authorization: '$gateway->clientToken()->generate()', -->
+  <!-- container: '#dropin-container' -->
+<!-- }, (error, dropinInstance) => { -->
+  <!-- if (error) console.error(error); -->
+
+  <!-- form.addEventListener('submit', event => { -->
+    <!-- event.preventDefault(); -->
+
+    <!-- dropinInstance.requestPaymentMethod((error, payload) => { -->
+      <!-- if (error) console.error(error); -->
+
+      <!-- // Step four: when the user is ready to complete their -->
+      <!-- //   transaction, use the dropinInstance to get a payment -->
+      <!-- //   method nonce for the user's selected payment method, then add -->
+      <!-- //   it a the hidden field before submitting the complete form to -->
+      <!-- //   a server-side integration -->
+      <!-- document.getElementById('nonce').value = payload.nonce; -->
+      <!-- form.submit(); -->
+    <!-- }); -->
+  <!-- }); -->
+<!-- }); -->
+
+</script>
+		<!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+		<link
+			href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i&display=swap"
+			rel="stylesheet"
+		/>
+
+		<title>TripFinder.</title>
+	</head>
+	<body>
+		<noscript>You need to enable JavaScript to run this app.</noscript>
+		<div id="root"></div>
+		<!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+	</body>
+</html>
