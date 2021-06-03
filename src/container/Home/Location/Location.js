@@ -43,7 +43,6 @@ const carouselOptions = {
 };
 
 const LocationGrid = () => {
-  console.log("bohimia")
   const [data, setData] = useState([]);
   useEffect(() => {
     axios.get("http://codestarc.com/client/newproject/api/getproperties").then(response => {

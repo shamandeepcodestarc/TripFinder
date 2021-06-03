@@ -11,6 +11,7 @@ import InputIncDec from 'components/UI/InputIncDec/InputIncDec';
 import { setStateToUrl } from 'library/helpers/url_handler';
 import { PROPERTY_SEARCH_PAGE } from 'settings/constant';
 import axios from 'axios';
+
 import './search.css'
 import {
   FormWrapper,
@@ -26,11 +27,7 @@ const calendarItem = {
 };
 
 const SearchForm = ({ history }) => {
-  
-
-
-
-  const [searchDate, setSearchDate] = useState({
+   const [searchDate, setSearchDate] = useState({
     setStartDate: null,
     setEndDate: null,
   });
@@ -124,7 +121,11 @@ axios.get(`http://codestarc.com/client/newproject/api/getStateByCity/${id}`).the
 
   
   const goToSearchPage = () => {
-    debugger
+    var listid = localStorage.setItem("listid",listing_id); 
+     var countid = localStorage.setItem("countryid",country_id);
+     var stateid = localStorage.setItem("stateid",state_id);
+     var cityid = localStorage.setItem("cityid",city_id);
+
     let tempLocation = [];
     const mapData = mapValue ? mapDataHelper(mapValue) : [];
     mapData &&
@@ -142,6 +143,7 @@ axios.get(`http://codestarc.com/client/newproject/api/getStateByCity/${id}`).the
       search: search,
     });
   };
+  
   return (
     <FormWrapper>
       {/* <ComponentWrapper>

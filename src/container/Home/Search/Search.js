@@ -21,9 +21,9 @@ const SearchArea = ({ searchTitleStyle, searchDescriptionStyle }) => {
         numberOfBullets={3}
       >
         <>
-          <div class="video-background">
-  <div class="video-foreground">
-    <iframe src="https://www.youtube.com/embed/4rQU7DBh5lA?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=1" frameborder="0" allowfullscreen></iframe>
+          <div className="video-background">
+  <div className="video-foreground">
+    <iframe src="https://www.youtube.com/embed/4rQU7DBh5lA?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=1" frameBorder="0" allowFullScreen></iframe>
   </div>
 </div>
           {/* <GlideSlide>

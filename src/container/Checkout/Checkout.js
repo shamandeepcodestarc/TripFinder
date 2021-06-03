@@ -1,5 +1,5 @@
 import React, { Component,useState } from 'react'
-
+import './Checkout.css';
 import axios from 'axios'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
@@ -11,7 +11,7 @@ import { BraintreeDropIn } from "braintree-web-react"
  
  
 class Checkout extends Component {
-	
+
 	  state = {
 		clientToken: null
 	  }
@@ -77,13 +77,13 @@ class Checkout extends Component {
       );
     } else {
       return (
-        <div>
+        <div className="braitreediv">
           <BraintreeDropIn
             options={{ authorization: this.state.clientToken }}
             onInstance={instance => (this.instance = instance)}
 			
           />
-          <button onClick={this.purchase.bind(this)}>Submit</button>
+          <button onClick={this.purchase.bind(this)}></button>
         </div>
       );
     }

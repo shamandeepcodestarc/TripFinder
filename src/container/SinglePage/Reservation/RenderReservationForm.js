@@ -4,6 +4,7 @@ import HtmlLabel from 'components/UI/HtmlLabel/HtmlLabel';
 import DatePickerRange from 'components/UI/DatePicker/ReactDates';
 import ViewWithPopup from 'components/UI/ViewWithPopup/ViewWithPopup';
 import InputIncDec from 'components/UI/InputIncDec/InputIncDec';
+import $ from 'jquery';
 import ReservationFormWrapper, {
   FormActionArea,
   FieldWrapper,
@@ -49,13 +50,44 @@ const RenderReservationForm = () => {
     });
   };
   const handleSubmit = (e) => {
+	 const task1 = localStorage.setItem('startDate',`${formState.startDate}`);           
+	 const task2 = localStorage.setItem('endDate',`${formState.endDate}`);           
+	 const task3 = localStorage.setItem('roomcout',`${formState.room}`);           
+	 const task4 = localStorage.setItem('gestcout',`${formState.guest}`);           
     e.preventDefault();
-    alert(
-      `Start Date: ${formState.startDate}\nEnd Date: ${formState.endDate}\nRooms: ${formState.room}\nGuests: ${formState.guest}`
-    );
+	   
+	if(localStorage.getItem('itemsincart') != null) {
+	var count = localStorage.getItem('itemsincart');
+	$("#lblCartCount").html(count);
+	}else{
+	var count = 0 ;
+	}
+	  e.preventDefault();
+      var hotelid = localStorage.getItem("id");
+      const task = localStorage.getItem('setproperty');            
+      count++;
+   
+	  $.ajax({ url: 'http://codestarc.com/client/newproject/api/getpropertybyid/'+hotelid,
+          type: 'get',
+          success: function(data) {
+           var resdata = data.data;
+           $("#lblCartCount").html(count);
+           localStorage.setItem('itemsincart', +count);
+           var local = localStorage.getItem('setproperty');
+           if(local){
+             var arr2= JSON.parse(local);
+             var jsonArray1 = arr2.concat(data.data);
+             localStorage.setItem('setproperty', JSON.stringify(jsonArray1));
+             var local_1 = localStorage.getItem('setproperty');
+           } else{
+             localStorage.setItem('setproperty', JSON.stringify(resdata));
+           }
+     }
+});
   };
-
+   
   return (
+  
     <ReservationFormWrapper className="form-container" onSubmit={handleSubmit}>
       <FieldWrapper>
         <HtmlLabel htmlFor="dates" content="Dates" />
@@ -110,7 +142,8 @@ const RenderReservationForm = () => {
         />
       </FieldWrapper>
       <FormActionArea>
-        <Button htmlType="submit" type="primary">
+	  
+        <Button htmlType="submit" data-id ={localStorage.getItem("id")} type="primary">
           Book Hotel
         </Button>
       </FormActionArea>

@@ -1,23 +1,11 @@
 import React ,{ useState } from 'react';
 import './Cart.css';
 import $ from 'jquery';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-// import Checkout from "./components/Checkout";
 
-const store = createStore(() => ({
-  birds: [
-    {
-      name: 'robin',
-      views: 1
-    }
-  ]
-}));
 
 $(document).ready(function () {
   recalculateCart();
-  var jsonPrser = JSON.parse(localStorage.getItem('myproperty'));
-    console.log(store);     
+  var jsonPrser = JSON.parse(localStorage.getItem('setproperty'));     
 });
 
 $('.like-btn').on('click', function () {
@@ -48,7 +36,6 @@ $(document).on('click', '.minus-btn', function (e) {
   var parent = $(this).parent('.quantity').next('.mysingle_price');
   var myprice = parent.val();
   var mytotal = parseFloat(myprice) * value
-  console.log(mytotal);
   parent_final.html(mytotal)
   recalculateCart();
 });
@@ -56,7 +43,6 @@ $(document).on('click', '.minus-btn', function (e) {
 
 $(document).on('click', '.plus-btn', function (e) {
   e.preventDefault();
-  console.log('gggg');
   var $this = $(this);
   var $input = $this.closest('div').find('input');
   var value = parseInt($input.val());
@@ -90,8 +76,11 @@ function recalculateCart() {
 
 const Cart = () => {
 	
-  var jsonPrser = JSON.parse(localStorage.getItem('myproperty'));
-  console.log(jsonPrser.data, 'sss');
+  var jsonPrser = JSON.parse(localStorage.getItem('setproperty'));
+  var sdate = localStorage.getItem('startDate')
+  var edate = localStorage.getItem('endDate')
+  var roomcount = localStorage.getItem('roomcout')
+  var getstcount = localStorage.getItem('gestcout')
    const mystyle = {
       padding: "10px",
 	  marginLeft:"50px",
@@ -107,7 +96,7 @@ const Cart = () => {
         marginLeft:"500px",
 		marginTop:"200px"
 		}
-	if(jsonPrser != null){
+	if(jsonPrser != null){ 
   return (
     <div>
       <div className="shopping-cart">
@@ -144,8 +133,7 @@ const Cart = () => {
                 </div>
                 <input type="hidden" className="mysingle_price" defaultValue={property.pricing} />
                 <span>Price</span>
-				<div className="total-price">{property.pricing}</div>
-                  
+				<div className="total-price">{property.pricing}</div>                  
               </div>
             )}
 		  
@@ -178,8 +166,7 @@ const Cart = () => {
 	<>
 	<h2 style={h2test}>Pleace select any cart.. </h2>
 	</>
-	)
-	}	
+	)}	
 	}
   
    

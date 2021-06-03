@@ -17,6 +17,7 @@ import {
   AGENT_ACCOUNT_SETTINGS_PAGE,
   PRIVACY_PAGE,
   PRICING_PLAN_PAGE,
+  PROPERTY_SEARCH_PAGE,
 } from './settings/constant';
 
 /**
@@ -68,6 +69,17 @@ const routes = [
         ),
       loading: Loading,
       modules: ['Cart'],
+    }),
+  },
+  {
+    path: PROPERTY_SEARCH_PAGE,
+    component: Loadable({
+      loader: () =>
+        import(
+          /* webpackChunkName: "SignUp" */ './container/Home/Search/properties'
+        ),
+      loading: Loading,
+      modules: ['properties'],
     }),
   },
   {

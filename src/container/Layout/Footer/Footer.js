@@ -9,7 +9,7 @@ const Footer = () => {
     <Footers
       logo={<Logo withLink linkTo="/" src={LogoImage} title="TripFinder." />}
       menu={<FooterMenu />}
-      copyright={`Copyright @ ${new Date().getFullYear()} RedQ, Inc.`}
+      copyright={`Codestarc.com @ ${new Date().getFullYear()} `}
     />
   );
 };

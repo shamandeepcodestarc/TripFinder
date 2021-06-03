@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from "axios";
 import { FiExternalLink } from 'react-icons/fi';
 import TextLink from 'components/UI/TextLink/TextLink';
 import Rating from 'components/UI/Rating/Rating';
@@ -6,11 +7,10 @@ import Favourite from 'components/UI/Favorite/Favorite';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import GridCard from '../GridCard/GridCard';
+
 import $ from 'jquery';
 
 const responsive = {
-
-
   desktop: {
 
     breakpoint: {
@@ -50,40 +50,29 @@ $(document).on('click', '.tour_add_cart', function (e) {
   e.preventDefault();
 
 
-
-  // var jsonArray1 = [{'name': "doug", 'id':5}, {'name': "dofug", 'id':23}];
-  // var jsonArray2 = [{'name': "goud", 'id':1}, {'name': "doaaug", 'id':52}];
-  // jsonArray1 = jsonArray1.concat(jsonArray2);
-  // console.log(jsonArray1,'=====================');
-
-
-
    var hotelid = $(this).data("id");
-   const task = localStorage.getItem('myproperty');            
+   const task = localStorage.getItem('setproperty');            
    count++;
    
-    
-   console.log(hotelid);
-   $.ajax({ url: 'http://codestarc.com/client/newproject/api/getpropertybyid/'+hotelid,
-         type: 'get',
-         success: function(data) {
+	  $.ajax({ url: 'http://codestarc.com/client/newproject/api/getpropertybyid/'+hotelid,
+          type: 'get',
+          success: function(data) {
            var resdata = data.data;
+           $("#lblCartCount").html(count);
+           localStorage.setItem('itemsincart', +count);
+           var local = localStorage.getItem('setproperty');
+           if(local){
+             var arr2= JSON.parse(local);
+             var jsonArray1 = arr2.concat(data.data);
+             localStorage.setItem('setproperty', JSON.stringify(jsonArray1));
+             var local_1 = localStorage.getItem('setproperty');
+           } else{
+             localStorage.setItem('setproperty', JSON.stringify(resdata));
+           }
+     }
+});
+});
 
-          $("#lblCartCount").html(count);
-          localStorage.setItem('itemsincart', +count);
-          var local = localStorage.getItem('myproperty');
-          if(local){
-            var arr2= JSON.parse(local);
-            var jsonArray1 = arr2.concat(data.data);
-            localStorage.setItem('myproperty', JSON.stringify(jsonArray1));
-            var local_1 = localStorage.getItem('myproperty');
-            console.log(JSON.parse(local_1),'======= original data');
-          } else{
-            localStorage.setItem('myproperty', JSON.stringify(resdata));
-          }
-    }
-});
-});
 const PostGrid = ({
   title,
   property_name,
@@ -107,8 +96,9 @@ const PostGrid = ({
     }
   ]
 }) => {
-
+     localStorage.setItem("id",id);
   return (
+  <>
     <GridCard
       isCarousel={true}
       favorite={
@@ -167,7 +157,9 @@ const PostGrid = ({
         ))}
       </Carousel>
     </GridCard>
+	</>
   );
+ 
 };
 
 export default PostGrid;

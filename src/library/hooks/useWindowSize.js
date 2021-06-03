@@ -1,5 +1,5 @@
 import React from 'react';
-
+import ReactDOM from 'react-dom';
 const useWindowSize = () => {
   const isClient = typeof window === 'object';
 
