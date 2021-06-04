@@ -41,28 +41,23 @@ class Checkout extends Component {
 
     async purchase() {
     const { nonce } = await this.instance.requestPaymentMethod();
-    console.log(nonce);
-    debugger;
     const response = await axios.post(
       'http://codestarc.com/client/newproject/api/payment',
       { paymentMethodNonce: nonce}
     )
-    console.log(response)
+   
   }
   
   async newpurchase() {
 	
 	 try {
       // Send nonce to your server
-        const { nonce } = await this.instance.tokenize()
- console.log(nonce);
- debugger;
+      const { nonce } = await this.instance.tokenize()
       const response = await axios.post(
          'http://codestarc.com/client/newproject/api/payment',
         { paymentMethodNonce: nonce }
       )
  
-      console.log(response)
     } catch (err) {
       console.error(err)
     }
@@ -83,7 +78,7 @@ class Checkout extends Component {
             onInstance={instance => (this.instance = instance)}
 			
           />
-          <button onClick={this.purchase.bind(this)}></button>
+          <button id="btn" onClick={this.purchase.bind(this)}>Pay</button>
         </div>
       );
     }

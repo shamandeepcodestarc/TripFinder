@@ -1,0 +1,12 @@
+.tour_add_cart{
+    height:25px;
+    color: #ffffff;
+  
+    border-radius: 3px;
+    font-weight: 500;
+    border-color: #008489;
+    background-color: #008489;
+    text-decoration: none; 
+    font-size: 15px;
+    font-weight: 700;
+}

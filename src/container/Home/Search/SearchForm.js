@@ -142,6 +142,7 @@ axios.get(`http://codestarc.com/client/newproject/api/getStateByCity/${id}`).the
       pathname:`${PROPERTY_SEARCH_PAGE}/${country_id}/${state_id}/${city_id}/${listing_id}`,
       search: search,
     });
+    window.location.reload();
   };
   
   return (

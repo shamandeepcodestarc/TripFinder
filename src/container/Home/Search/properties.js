@@ -1,8 +1,5 @@
 import React, { Component, useState } from 'react'
-import axios from 'axios'
-import ReactDOM from 'react-dom';
-import Rating from 'components/UI/Rating/Rating';
-import GridCard from 'components/GridCard/GridCard';
+
 import 'react-multi-carousel/lib/styles.css';
 import './property.css';
 import Heading from 'components/UI/Heading/Heading';
@@ -16,10 +13,13 @@ import usepropertyApi from 'library/hooks/usepropertyApi';
 import { LISTING_POSTS_PAGE, SINGLE_POST_PAGE } from 'settings/constant';
 
 const Property = () => {
+
+
   const { data, loading } = usepropertyApi('/data/tjsonop-hotel.');
   const { width } = useWindowSize();
-
+  
   let posts = data;
+
   let limit;
 
   if (data && width <= 767) {
@@ -38,8 +38,8 @@ const Property = () => {
     posts = data.slice(0, 10);
     limit = 10;
   }
-
   return (
+   
     <Container fluid={true}>
       <SectionTitle
         title={<Heading content="Travelers’ Choice: Top hotels" />}

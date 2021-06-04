@@ -26,11 +26,10 @@ async function SuperFetch(
   // we will had custom headers here.
 
   return fetch("http://codestarc.com/client/newproject/api/getPropertybyIds/"+countid+'/'+stateid+'/'+cityid+'/'+listid, options)
-    .then(res => {
-      console.log(Promise.resolve(res.json()));
-      return Promise.resolve(res.json());
-    })
-    .catch(error => Promise.reject(error));
+  .then(res => {
+    return Promise.resolve(res.json());
+  })
+  .catch(error => Promise.reject(error));
 }
 
 function dataFetchReducer(state, action) {

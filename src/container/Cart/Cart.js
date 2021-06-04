@@ -1,6 +1,7 @@
 import React ,{ useState } from 'react';
 import './Cart.css';
 import $ from 'jquery';
+import { set } from 'lodash';
 
 
 $(document).ready(function () {
@@ -58,22 +59,21 @@ $(document).on('click', '.plus-btn', function (e) {
   var parent = $(this).parent('.quantity').next('.mysingle_price');
   var myprice = parent.val();
   var mytotal = parseFloat(myprice) * value
-  console.log(mytotal);
+  localStorage.setItem("totle",mytotal)
   parent_final.html(mytotal);
   recalculateCart();
 });
 
 function recalculateCart() {
-  var subtotal = 0;
+  var totle = parseInt(localStorage.getItem("totle")) ;
+  var subtotal = 0 + totle ;
   $('.item').each(function () {
-    subtotal += parseFloat($(this).children('.total-price').text());
+    subtotal += parseFloat($(this).children('.total-price').text()) ;
+    console.log(subtotal,"dddddddddddddd")
   });
   $('#cart-total').html(subtotal);
   $('#cart-subtotal').html(subtotal);
 }
-
-
-
 const Cart = () => {
 	
   var jsonPrser = JSON.parse(localStorage.getItem('setproperty'));
@@ -96,6 +96,9 @@ const Cart = () => {
         marginLeft:"500px",
 		marginTop:"200px"
 		}
+    function handleRmove(){
+
+    }
 	if(jsonPrser != null){ 
   return (
     <div>
@@ -112,7 +115,7 @@ const Cart = () => {
               <div className="item" key={index}>
                 <div className="buttons">
                 </div>
-			<div className="image" style={imagecss}>
+	               	<div className="image" style={imagecss}>
                   <img src="http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-14_thumb.jpg" alt="" />
                 </div>
                 <div className="description">
@@ -133,7 +136,8 @@ const Cart = () => {
                 </div>
                 <input type="hidden" className="mysingle_price" defaultValue={property.pricing} />
                 <span>Price</span>
-				<div className="total-price">{property.pricing}</div>                  
+			           	<div className="total-price">{property.pricing}</div>     
+                   <button type="button" onChange={handleRmove(property.id)}>X</button>                  
               </div>
             )}
 		  
@@ -144,10 +148,9 @@ const Cart = () => {
                 <label>Subtotal :</label>
                 <div className="totals-value" id="cart-subtotal">0</div>
               </div>
-
-              <div className="totals-item totals-item-total">
+            <div className="totals-item totals-item-total">
                 <label>Grand Total :</label>
-                <div className="totals-value" id="cart-total">0</div>
+                <div className="totals-value" id="cart-total">{localStorage.getItem("totle")}</div>
               </div>
               <a href="/Checkout"><button className="checkout" >Checkout</button></a>
             </div>

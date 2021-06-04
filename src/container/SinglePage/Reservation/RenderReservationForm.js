@@ -11,6 +11,13 @@ import ReservationFormWrapper, {
   RoomGuestWrapper,
   ItemWrapper,
 } from './Reservation.style.js';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom";
 
 const RenderReservationForm = () => {
   const [formState, setFormState] = useState({
@@ -19,6 +26,9 @@ const RenderReservationForm = () => {
     room: 0,
     guest: 0,
   });
+
+  var str = window.location.href;
+  var array = str.split("/").pop();
 
   const handleIncrement = (type) => {
     setFormState({
@@ -61,13 +71,13 @@ const RenderReservationForm = () => {
 	$("#lblCartCount").html(count);
 	}else{
 	var count = 0 ;
-	}
+}
 	  e.preventDefault();
-      var hotelid = localStorage.getItem("id");
+      var hotelid = array;
       const task = localStorage.getItem('setproperty');            
       count++;
    
-	  $.ajax({ url: 'http://codestarc.com/client/newproject/api/getpropertybyid/'+hotelid,
+	  $.ajax({ url: 'http://codestarc.com/client/newproject/api/getpropertybyid/'+ hotelid,
           type: 'get',
           success: function(data) {
            var resdata = data.data;
@@ -143,7 +153,7 @@ const RenderReservationForm = () => {
       </FieldWrapper>
       <FormActionArea>
 	  
-        <Button htmlType="submit" data-id ={localStorage.getItem("id")} type="primary">
+        <Button htmlType="submit" data-id ={array} type="primary">
           Book Hotel
         </Button>
       </FormActionArea>

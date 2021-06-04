@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from "axios";
+import './ProductCard.css';
 import { FiExternalLink } from 'react-icons/fi';
 import TextLink from 'components/UI/TextLink/TextLink';
 import Rating from 'components/UI/Rating/Rating';
@@ -9,6 +10,7 @@ import 'react-multi-carousel/lib/styles.css';
 import GridCard from '../GridCard/GridCard';
 
 import $ from 'jquery';
+import { style } from 'styled-system';
 
 const responsive = {
   desktop: {
@@ -40,39 +42,38 @@ const responsive = {
 //  localStorage.removeItem('myproperty');
 //  localStorage.removeItem('itemsincart');
 
-if(localStorage.getItem('itemsincart') != null) {
-var count = localStorage.getItem('itemsincart');
-$("#lblCartCount").html(count);
-}else{
-var count = 0 ;
-}
-$(document).on('click', '.tour_add_cart', function (e) {
-  e.preventDefault();
+// if(localStorage.getItem('itemsincart') != null) {
+// var count = localStorage.getItem('itemsincart');
+// $("#lblCartCount").html(count);
+// }else{
+// var count = 0 ;
+// }
+// $(document).on('click', '.tour_add_cart', function (e) {
+//   e.preventDefault();
 
 
-   var hotelid = $(this).data("id");
-   const task = localStorage.getItem('setproperty');            
-   count++;
+//    var hotelid = $(this).data("id");
+//    const task = localStorage.getItem('setproperty');            
+//    count++;
    
-	  $.ajax({ url: 'http://codestarc.com/client/newproject/api/getpropertybyid/'+hotelid,
-          type: 'get',
-          success: function(data) {
-           var resdata = data.data;
-           $("#lblCartCount").html(count);
-           localStorage.setItem('itemsincart', +count);
-           var local = localStorage.getItem('setproperty');
-           if(local){
-             var arr2= JSON.parse(local);
-             var jsonArray1 = arr2.concat(data.data);
-             localStorage.setItem('setproperty', JSON.stringify(jsonArray1));
-             var local_1 = localStorage.getItem('setproperty');
-           } else{
-             localStorage.setItem('setproperty', JSON.stringify(resdata));
-           }
-     }
-});
-});
-
+// 	  $.ajax({ url: 'http://codestarc.com/client/newproject/api/getpropertybyid/'+hotelid,
+//           type: 'get',
+//           success: function(data) {
+//            var resdata = data.data;
+//            $("#lblCartCount").html(count);
+//            localStorage.setItem('itemsincart', +count);
+//            var local = localStorage.getItem('setproperty');
+//            if(local){
+//              var arr2= JSON.parse(local);
+//              var jsonArray1 = arr2.concat(data.data);
+//              localStorage.setItem('setproperty', JSON.stringify(jsonArray1));
+//              var local_1 = localStorage.getItem('setproperty');
+//            } else{
+//              localStorage.setItem('setproperty', JSON.stringify(resdata));
+//            }
+//      }
+// });
+// });
 const PostGrid = ({
   title,
   property_name,
@@ -95,8 +96,11 @@ const PostGrid = ({
       "url": "http://s3.amazonaws.com/redqteam.com/tripfinder-images/hotel-14_thumb.jpg"
     }
   ]
-}) => {
-     localStorage.setItem("id",id);
+}, style = {
+  height: "400px",
+ 
+}
+) => {
   return (
   <>
     <GridCard
@@ -118,11 +122,6 @@ const PostGrid = ({
           icon={<FiExternalLink />}
           content="View Details"
         />
-      }
-      addtoCartBtn={
-        <button type="button"
-        className="tour_add_cart" data-id={`${id}`}    
-        > Add to Cart </button>
       }
     >
       <Carousel

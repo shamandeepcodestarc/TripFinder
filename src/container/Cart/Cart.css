@@ -115,7 +115,7 @@ body {
   button[class*=btn] {
     width: 30px;
     height: 30px;
-	font-style:initial;
+  	font-style:initial;
     background-color: #E1E8EE;
     border-radius: 6px;
     border: none;
@@ -161,6 +161,7 @@ button.checkout {
     background: #008489;
     border: 1px solid #008489;
     margin-top: 10px;
+    border-radius: 3px;
 }
 .totals-item label {
     font-weight: bold;

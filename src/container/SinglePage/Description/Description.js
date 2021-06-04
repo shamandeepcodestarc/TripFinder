@@ -17,7 +17,8 @@ const Description = ({
   titleStyle,
   locationMetaStyle,
   contentStyle,
-}) => {
+ }) => {
+  
   return (
     <Element name="overview" className="overview">
       <DescriptionWrapper>
