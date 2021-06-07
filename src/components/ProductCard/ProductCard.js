@@ -39,41 +39,7 @@ const responsive = {
     paritialVisibilityGutter: 30,
   },
 };
-//  localStorage.removeItem('myproperty');
-//  localStorage.removeItem('itemsincart');
 
-// if(localStorage.getItem('itemsincart') != null) {
-// var count = localStorage.getItem('itemsincart');
-// $("#lblCartCount").html(count);
-// }else{
-// var count = 0 ;
-// }
-// $(document).on('click', '.tour_add_cart', function (e) {
-//   e.preventDefault();
-
-
-//    var hotelid = $(this).data("id");
-//    const task = localStorage.getItem('setproperty');            
-//    count++;
-   
-// 	  $.ajax({ url: 'http://codestarc.com/client/newproject/api/getpropertybyid/'+hotelid,
-//           type: 'get',
-//           success: function(data) {
-//            var resdata = data.data;
-//            $("#lblCartCount").html(count);
-//            localStorage.setItem('itemsincart', +count);
-//            var local = localStorage.getItem('setproperty');
-//            if(local){
-//              var arr2= JSON.parse(local);
-//              var jsonArray1 = arr2.concat(data.data);
-//              localStorage.setItem('setproperty', JSON.stringify(jsonArray1));
-//              var local_1 = localStorage.getItem('setproperty');
-//            } else{
-//              localStorage.setItem('setproperty', JSON.stringify(resdata));
-//            }
-//      }
-// });
-// });
 const PostGrid = ({
   title,
   property_name,

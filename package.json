@@ -1,6 +1,8 @@
 {
 	"name": "@tripfinder/hotel-cra",
+	"homepage": "http://visitmu.codestarc.com/",
 	"version": "2.0.0",
+	
 	"dependencies": {
 		"-": "0.0.1",
 		"@glidejs/glide": "^3.4.1",

@@ -38,34 +38,36 @@ class Checkout extends Component {
       console.error(err)
     }
   }
-
-    async purchase() {
+  
+    async purchase() {   
+     var  amount = localStorage.getItem("amount");
     const { nonce } = await this.instance.requestPaymentMethod();
     const response = await axios.post(
       'http://codestarc.com/client/newproject/api/payment',
-      { paymentMethodNonce: nonce}
-    )
-   
+      { paymentMethodNonce: nonce,amount : amount}
+          )
+    console.log(response,"dddddddddd",amount)
   }
   
   async newpurchase() {
-	
+	  var   amount = localStorage.getItem("amount");
 	 try {
       // Send nonce to your server
       const { nonce } = await this.instance.tokenize()
       const response = await axios.post(
          'http://codestarc.com/client/newproject/api/payment',
-        { paymentMethodNonce: nonce }
+        { paymentMethodNonce: nonce , amount:amount }
       )
- 
     } catch (err) {
       console.error(err)
     }
   }
  
   render() {
+ 
    if (!this.state.clientToken) {
       return (
+
         <div>
           <h1>Loading...</h1>
         </div>
@@ -81,6 +83,7 @@ class Checkout extends Component {
           <button id="btn" onClick={this.purchase.bind(this)}>Pay</button>
         </div>
       );
+    
     }
   }
 }

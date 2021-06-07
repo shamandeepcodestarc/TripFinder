@@ -1,7 +1,7 @@
 import React ,{ useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Cart.css';
 import $ from 'jquery';
-import { set } from 'lodash';
 
 
 $(document).ready(function () {
@@ -59,20 +59,21 @@ $(document).on('click', '.plus-btn', function (e) {
   var parent = $(this).parent('.quantity').next('.mysingle_price');
   var myprice = parent.val();
   var mytotal = parseFloat(myprice) * value
-  localStorage.setItem("totle",mytotal)
+  console.log(mytotal);
   parent_final.html(mytotal);
   recalculateCart();
 });
 
 function recalculateCart() {
-  var totle = parseInt(localStorage.getItem("totle")) ;
-  var subtotal = 0 + totle ;
+  var subtotal = 0;
   $('.item').each(function () {
-    subtotal += parseFloat($(this).children('.total-price').text()) ;
-    console.log(subtotal,"dddddddddddddd")
+    subtotal += parseFloat($(this).children('.total-price').text());
   });
   $('#cart-total').html(subtotal);
   $('#cart-subtotal').html(subtotal);
+  var amount = subtotal;
+  localStorage.setItem("amount",amount)
+  console.log(localStorage.getItem("amount",'eeeeeeeeeeeeeeeee'));
 }
 const Cart = () => {
 	
@@ -96,9 +97,6 @@ const Cart = () => {
         marginLeft:"500px",
 		marginTop:"200px"
 		}
-    function handleRmove(){
-
-    }
 	if(jsonPrser != null){ 
   return (
     <div>
@@ -136,8 +134,7 @@ const Cart = () => {
                 </div>
                 <input type="hidden" className="mysingle_price" defaultValue={property.pricing} />
                 <span>Price</span>
-			           	<div className="total-price">{property.pricing}</div>     
-                   <button type="button" onChange={handleRmove(property.id)}>X</button>                  
+				<div className="total-price">{property.pricing}</div>                  
               </div>
             )}
 		  
@@ -150,9 +147,9 @@ const Cart = () => {
               </div>
             <div className="totals-item totals-item-total">
                 <label>Grand Total :</label>
-                <div className="totals-value" id="cart-total">{localStorage.getItem("totle")}</div>
+                <div className="totals-value" id="cart-total">0</div>
               </div>
-              <a href="/Checkout"><button className="checkout" >Checkout</button></a>
+              <Link to="/Checkout"><button className="checkout" >Checkout</button></Link>
             </div>
 
 
