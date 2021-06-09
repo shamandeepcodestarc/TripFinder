@@ -192,11 +192,11 @@ const NotFound = Loadable({
 });
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const { loggedIn } = useContext(AuthContext);
+  const { IsLoggedIn } = useContext(AuthContext);
   return (
     <Route
       render={(props) =>
-        loggedIn ? <Component {...props} /> : <Redirect to={LOGIN_PAGE} />
+        IsLoggedIn ? <Component {...props} /> : <Redirect to={LOGIN_PAGE} />
       }
       {...rest}
     />

@@ -173,7 +173,7 @@ axios.get(`http://codestarc.com/client/newproject/api/getStateByCity/${id}`).the
 )}
 
 </select>
-      {/* <ComponentWrapper>
+    {/* <ComponentWrapper>
         <FaRegCalendar className="calendar" />
         <DateRangePickerBox
           item={calendarItem}

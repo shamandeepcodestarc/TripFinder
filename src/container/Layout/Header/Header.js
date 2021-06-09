@@ -42,7 +42,7 @@ const LogoIcon = () => (
 
 export default withRouter(function Header({ location }) {
   const [{ searchVisibility }] = useContext(LayoutContext);
-  const { loggedIn } = useContext(AuthContext);
+  const { IsLoggedIn } = useContext(AuthContext);
   const { width } = useWindowSize();
   const [state, setState] = useState(false);
 
@@ -74,7 +74,7 @@ export default withRouter(function Header({ location }) {
             }
             navMenu={<MainMenu />}
             authMenu={<AuthMenu />}
-            isLogin={loggedIn}
+            isLogin={IsLoggedIn}
             avatar={<Logo src={avatarImg} />}
             profileMenu={<ProfileMenu avatar={<Logo src={avatarImg} />} />}
             headerType={headerType}
@@ -117,7 +117,7 @@ export default withRouter(function Header({ location }) {
                   <IoIosClose />
                 </button>
               </CloseDrawer>
-              {loggedIn ? (
+              {IsLoggedIn ? (
                 <AvatarWrapper>
                   <AvatarImage>
                     <Logo src={avatarImg} />

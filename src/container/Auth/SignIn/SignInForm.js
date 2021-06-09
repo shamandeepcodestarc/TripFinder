@@ -7,14 +7,27 @@ import FormControl from 'components/UI/FormControl/FormControl';
 import { AuthContext } from 'context/AuthProvider';
 import { FORGET_PASSWORD_PAGE } from 'settings/constant';
 import { FieldWrapper, SwitchWrapper, Label } from '../Auth.style';
-
+import axios from "axios";
 const SignInForm = () => {
-  const { signIn, loggedIn } = useContext(AuthContext);
+  const { signIn, IsLoggedIn } = useContext(AuthContext);
   const { control, errors, handleSubmit } = useForm();
   const onSubmit = (data) => {
     signIn(data);
+    axios.post(`http://codestarc.com/client/newproject/api/login`, data)
+    .then(res => {
+      if (res.data.data) {
+        localStorage.setItem("IsLoggedIn", true);
+        localStorage.setItem("key", JSON.stringify(res.data.data.token));
+        localStorage.setItem("data", res.data.data.user.id);
+        localStorage.setItem("role", JSON.stringify(res.data.data.user.role))
+        return res.data.data;
+        // history.push('/canclation', roomModel)
+      }
+    }).catch(err => {
+      console.log(err);
+    })
   };
-  if (loggedIn) {
+  if (IsLoggedIn) {
     return <Redirect to={{ pathname: '/' }} />;
   }
 

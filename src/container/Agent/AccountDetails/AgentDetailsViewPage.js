@@ -36,7 +36,7 @@ import AgentDetailsPage, {
 
 const ProfileNavigation = (props) => {
   const { match, className } = props;
-  const { loggedIn } = useContext(AuthContext);
+  const { IsLoggedIn } = useContext(AuthContext);
   return (
     <NavigationArea>
       <Container fluid={true}>
@@ -58,7 +58,7 @@ const ProfileNavigation = (props) => {
           </Menu.Item>
         </Menu>
 
-        {loggedIn && (
+        {IsLoggedIn && (
           <Link className="add_card" to={ADD_HOTEL_PAGE}>
             <IoIosAdd /> Add Hotel
           </Link>

@@ -11,7 +11,7 @@ import {
 
 const MobileMenu = ({ className }) => {
   // auth context
-  const { loggedIn, logOut } = useContext(AuthContext);
+  const { IsLoggedIn, logOut } = useContext(AuthContext);
 
   return (
     <Menu className={className}>
@@ -26,12 +26,12 @@ const MobileMenu = ({ className }) => {
       <Menu.Item key="2">
         <NavLink to={PRICING_PLAN_PAGE}>Pricing</NavLink>
       </Menu.Item>
-      {loggedIn && (
+      {IsLoggedIn && (
         <Menu.Item key="3">
           <NavLink to={AGENT_ACCOUNT_SETTINGS_PAGE}>Account Settings</NavLink>
         </Menu.Item>
       )}
-      {loggedIn && (
+      {IsLoggedIn && (
         <Menu.Item key="4">
           <button onClick={logOut}>Log Out</button>
         </Menu.Item>

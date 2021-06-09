@@ -89,6 +89,7 @@ const RenderReservationForm = () => {
              var jsonArray1 = arr2.concat(data.data);
              localStorage.setItem('setproperty', JSON.stringify(jsonArray1));
              var local_1 = localStorage.getItem('setproperty');
+          
            } else{
              localStorage.setItem('setproperty', JSON.stringify(resdata));
            }

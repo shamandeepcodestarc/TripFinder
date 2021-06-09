@@ -14,8 +14,8 @@ const SingleMapDisplay = ({ location }) => {
   };
 
   hotelData.push({
-    lat: location?.location.lat,
-    lng: location?.location.lng,
+    // lat: location?.location.lat,
+    // lng: location?.location.lng,
     id: location?.id,
     title: location?.title,
     thumbUrl: location?.image.thumb_url,

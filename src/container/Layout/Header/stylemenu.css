@@ -1,0 +1,10 @@
+#cartcount{
+    font-size: 12px;
+    vertical-align: top;
+    margin-left: -11px;
+    position: absolute;
+    top: 19px;
+    left: 39px;
+    font-weight: bold;
+    right: 15px;
+}

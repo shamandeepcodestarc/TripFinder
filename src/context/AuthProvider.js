@@ -13,32 +13,35 @@ const fakeUserData = {
 
 const AuthProvider = (props) => {
   let history = useHistory();
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [IsLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
 
   const signIn = (params) => {
     console.log(params, 'sign in form Props');
     setUser(fakeUserData);
-    setLoggedIn(true);
+    setIsLoggedIn(true);
+    localStorage.setItem("IsLoggedIn",IsLoggedIn);
     history.push(`/`);
   };
 
   const signUp = (params) => {
     console.log(params, 'sign up form Props');
     setUser(fakeUserData);
-    setLoggedIn(true);
+    setIsLoggedIn(true);
+    localStorage.setItem("IsLoggedIn",IsLoggedIn);
     history.push(`/`);
   };
 
   const logOut = () => {
     setUser(null);
-    setLoggedIn(false);
+    setIsLoggedIn(false);
+    localStorage.setItem("IsLoggedIn",IsLoggedIn);
   };
 
   return (
     <AuthContext.Provider
       value={{
-        loggedIn,
+        IsLoggedIn,
         logOut,
         signIn,
         signUp,

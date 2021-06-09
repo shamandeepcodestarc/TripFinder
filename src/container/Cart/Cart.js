@@ -2,8 +2,7 @@ import React ,{ useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Cart.css';
 import $ from 'jquery';
-
-
+import { Redirect } from 'react-router-dom';
 $(document).ready(function () {
   recalculateCart();
   var jsonPrser = JSON.parse(localStorage.getItem('setproperty'));     
@@ -73,15 +72,17 @@ function recalculateCart() {
   $('#cart-subtotal').html(subtotal);
   var amount = subtotal;
   localStorage.setItem("amount",amount)
-  console.log(localStorage.getItem("amount",'eeeeeeeeeeeeeeeee'));
+ 
 }
-const Cart = () => {
+const Cart = (props) => {
 	
   var jsonPrser = JSON.parse(localStorage.getItem('setproperty'));
   var sdate = localStorage.getItem('startDate')
   var edate = localStorage.getItem('endDate')
   var roomcount = localStorage.getItem('roomcout')
   var getstcount = localStorage.getItem('gestcout')
+  var trues = localStorage.getItem("IsLoggedIn");
+  var loginIn = Boolean(trues)
    const mystyle = {
       padding: "10px",
 	  marginLeft:"50px",
@@ -98,6 +99,7 @@ const Cart = () => {
 		marginTop:"200px"
 		}
 	if(jsonPrser != null){ 
+    if( loginIn === true){
   return (
     <div>
       <div className="shopping-cart">
@@ -121,7 +123,6 @@ const Cart = () => {
                   <span>{property.property_name}</span>
                   <span>{property.property_type}</span>
                 </div>
-			      
                 <div className="quantity">
                   <button className="minus-btn" type="button" name="button">
                     <span className="incre_opr">-</span>
@@ -134,7 +135,7 @@ const Cart = () => {
                 </div>
                 <input type="hidden" className="mysingle_price" defaultValue={property.pricing} />
                 <span>Price</span>
-				<div className="total-price">{property.pricing}</div>                  
+			      	<div className="total-price">{property.pricing}</div>                  
               </div>
             )}
 		  
@@ -149,7 +150,9 @@ const Cart = () => {
                 <label>Grand Total :</label>
                 <div className="totals-value" id="cart-total">0</div>
               </div>
+                
               <Link to="/Checkout"><button className="checkout" >Checkout</button></Link>
+           
             </div>
 
 
@@ -160,7 +163,17 @@ const Cart = () => {
 
     </div>
 	
-	)}else{
+	)
+}
+else{
+  return(
+    <>
+    {localStorage.removeItem("IsLoggedIn")}
+  <Redirect to="/sign-in"/>
+  	</>
+	)
+}}
+else{
 		
 	return(
 	<>

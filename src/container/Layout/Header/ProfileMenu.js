@@ -7,6 +7,7 @@ import {
   AGENT_PROFILE_PAGE,
   AGENT_ACCOUNT_SETTINGS_PAGE,
   ADD_HOTEL_PAGE,
+  CART_PAGE,
 } from 'settings/constant';
 
 const ProfileMenu = ({ avatar, history }) => {
@@ -26,7 +27,9 @@ const ProfileMenu = ({ avatar, history }) => {
   }
 
   return (
+    <>
     <div className="avatar-dropdown" ref={dropdownRef}>
+    
       <div className="dropdown-handler" onClick={handleDropdown}>
         {avatar}
       </div>
@@ -41,11 +44,15 @@ const ProfileMenu = ({ avatar, history }) => {
         <Menu.Item onClick={closeDropdown} key="2">
           <NavLink to={AGENT_ACCOUNT_SETTINGS_PAGE}>Account Settings</NavLink>
         </Menu.Item>
-        <Menu.Item key="3">
+        <Menu.Item onClick={closeDropdown} key="3">
+          <NavLink to={CART_PAGE}>Add To Cart</NavLink>
+        </Menu.Item>
+        <Menu.Item key="4">
           <button onClick={handleLogout}>Log Out</button>
         </Menu.Item>
       </Menu>
     </div>
+    </>
   );
 };
 

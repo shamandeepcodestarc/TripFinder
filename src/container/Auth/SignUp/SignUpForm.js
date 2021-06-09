@@ -6,9 +6,9 @@ import { Input, Switch, Button } from 'antd';
 import FormControl from 'components/UI/FormControl/FormControl';
 import { AuthContext } from 'context/AuthProvider';
 import { FieldWrapper, SwitchWrapper, Label } from '../Auth.style';
-
+import axios from "axios";
 export default () => {
-  const { signUp, loggedIn } = useContext(AuthContext);
+  const { signUp, IsLoggedIn } = useContext(AuthContext);
   const { control, watch, errors, handleSubmit } = useForm({
     mode: 'onChange',
   });
@@ -16,20 +16,30 @@ export default () => {
   const confirmPassword = watch('confirmPassword');
   const onSubmit = (data) => {
     signUp(data);
+    debugger
+    axios.post(`http://codestarc.com/client/newproject/api/register`, data)
+    .then(res => {
+      if (res.data.data) {
+        return res.data.data;
+      // history.push('/canclation', roomModel)
+      }
+    }).catch(err => {
+      console.log(err);
+    })
   };
-  if (loggedIn) {
-    return <Redirect to={{ pathname: '/' }} />;
+  if (IsLoggedIn) {
+    return <Redirect to={{ pathname: '/sign-in' }} />;
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormControl
-        label="Username"
-        htmlFor="username"
+        label="name"
+        htmlFor="name"
         error={
-          errors.username && (
+          errors.name && (
             <>
-              {errors.username?.type === 'required' && (
+              {errors.name?.type === 'required' && (
                 <span>This field is required!</span>
               )}
             </>
@@ -38,8 +48,8 @@ export default () => {
       >
         <Controller
           as={<Input />}
-          id="username"
-          name="username"
+          id="name"
+          name="name"
           defaultValue=""
           control={control}
           rules={{

@@ -11,7 +11,6 @@ import { BraintreeDropIn } from "braintree-web-react"
  
  
 class Checkout extends Component {
-
 	  state = {
 		clientToken: null
 	  }
@@ -32,7 +31,7 @@ class Checkout extends Component {
       // Get client token for authorization from your server
       const response = await axios.get('http://codestarc.com/client/newproject/api/maketoken')
       const clientToken =  response.data.clientToken
- 
+     
       this.setState({ clientToken })
     } catch (err) {
       console.error(err)
@@ -41,23 +40,26 @@ class Checkout extends Component {
   
     async purchase() {   
      var  amount = localStorage.getItem("amount");
+     var id =localStorage.getItem("data");
     const { nonce } = await this.instance.requestPaymentMethod();
     const response = await axios.post(
       'http://codestarc.com/client/newproject/api/payment',
-      { paymentMethodNonce: nonce,amount : amount}
+      { paymentMethodNonce: nonce,amount : amount,id: id}
           )
-    console.log(response,"dddddddddd",amount)
+          console.log(id,"===============");
   }
   
   async newpurchase() {
 	  var   amount = localStorage.getItem("amount");
+    var id = localStorage.getItem("data");
 	 try {
       // Send nonce to your server
       const { nonce } = await this.instance.tokenize()
       const response = await axios.post(
          'http://codestarc.com/client/newproject/api/payment',
-        { paymentMethodNonce: nonce , amount:amount }
+        { paymentMethodNonce: nonce , amount : amount ,id : id.id }
       )
+      
     } catch (err) {
       console.error(err)
     }

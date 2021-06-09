@@ -1,25 +1,31 @@
 import { useState, useReducer, useEffect } from 'react';
-
+let token = localStorage.getItem("key");
+var token1 = token.replace(/"/g, "");
 async function SuperFetch(
   url,
   method = 'GET',
   headers = {
     'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    'Authorization': `Bearer ${token1}`
   },
-  body = {}
+  body = {},
+  
 ) {
   let options = {
     method,
     headers,
+    
   };
-  if (method === 'POST' || method === 'PUT') options = { ...options, body };
+  if (method === 'POST' || method === 'PUT') options = { ...options, body};
 
   // authentication
   // we will had custom headers here.
-
-  return fetch("http://codestarc.com/client/newproject/api/getproperties", options)
+  var str = window.location.href;
+  var array = str.split("/").pop();
+  return fetch(`http://codestarc.com/client/newproject/api/properties/${array}`, options)
     .then(res => {
-      return Promise.resolve(res.json());
+       
+      return Promise.resolve(array);
     })
     .catch(error => Promise.reject(error));
 }

@@ -4,7 +4,7 @@ import { Row, Col, Button } from 'antd';
 import { AuthContext } from 'context/AuthProvider';
 
 const SocialLogin = () => {
-  const { signUp, loggedIn } = useContext(AuthContext);
+  const { signUp, IsLoggedIn } = useContext(AuthContext);
   const [state, setState] = useState({
     facebook: false,
     github: false,
@@ -24,7 +24,7 @@ const SocialLogin = () => {
       signUp({});
     }, 600);
   };
-  if (loggedIn) {
+  if (IsLoggedIn) {
     return <Redirect to={{ pathname: '/' }} />;
   }
 
