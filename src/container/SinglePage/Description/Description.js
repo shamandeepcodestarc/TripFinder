@@ -1,65 +1,46 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Element } from 'react-scroll';
-import Rating from 'components/UI/Rating/Rating';
-import Heading from 'components/UI/Heading/Heading';
-import Text from 'components/UI/Text/Text';
-import { Button } from 'antd';
-import DescriptionWrapper from './Description.style';
-import { RatingMeta, TextButton } from '../SinglePageView.style';
+import React,{useState} from 'react';
+import axios from 'axios';
+import { Label } from 'container/Auth/Auth.style';
 
-const Description = ({
-  title,
-  location,
-  content,
-  rating,
-  ratingCount,
-  titleStyle,
-  locationMetaStyle,
-  contentStyle,
- }) => {
-  
-  return (
-    <Element name="overview" className="overview">
-      <DescriptionWrapper>
-        <Text content={location.formattedAddress} {...locationMetaStyle} />
-        <Heading as="h2" content={title} {...titleStyle} />
-        <RatingMeta>
-          <Rating rating={rating} ratingCount={ratingCount} type="bulk" />
-        </RatingMeta>
-        <Text content={content} {...contentStyle} />
-        <TextButton>
-          <Button>Read more about the hotel</Button>
-        </TextButton>
-      </DescriptionWrapper>
-    </Element>
-  );
-};
+const Description = ()=>{
+  const [PropertyData, setPropertyData] = useState([]);
+    let token = localStorage.getItem("key");
+    var token1 = token.replace(/"/g, "");
+    console.log(token);
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token1}`
+      }
+    };
+    var str = window.location.href;
+    var id = str.split("/").pop();
+    axios.get(`http://codestarc.com/client/newproject/api/properties/${id}`, config).then((response) => {
+      let dataJson = JSON.stringify(response);
+      let jsonPrser = JSON.parse(dataJson);
+      if (jsonPrser.status == 200) {
+        setPropertyData(jsonPrser.data.data);
+      }
+    }).catch((error) => {
+      console.log(error, 'errror');
 
-Description.propTypes = {
-  titleStyle: PropTypes.object,
-  locationMetaStyle: PropTypes.object,
-  contentStyle: PropTypes.object,
-};
-
-Description.defaultProps = {
-  titleStyle: {
-    color: '#2C2C2C',
-    fontSize: ['17px', '20px', '25px'],
-    lineHeight: ['1.15', '1.2', '1.36'],
-    mb: '4px',
-  },
-  locationMetaStyle: {
-    fontSize: '13px',
-    fontWeight: '400',
-    color: '#909090',
-  },
-  contentStyle: {
-    fontSize: '15px',
-    fontWeight: '400',
-    color: '#2C2C2C',
-    lineHeight: '1.6',
-  },
+    }); 
+   
+ return(
+   <>
+   <div>
+      <Label>Name:</Label><Label>{PropertyData.property_name}</Label><br/>
+      <Label>location:</Label><Label>{PropertyData.location}</Label><br/>
+      <Label>Price:</Label><Label>{PropertyData.pricing}</Label><br/>
+      <Label>Title:</Label><Label>{PropertyData.title}</Label><br/>
+      <Label>Totle Rooms:</Label><Label>{PropertyData.total_rooms}</Label><br/>
+      <Label>Floor:</Label><Label>{PropertyData.floor}</Label><br/>
+      <Label>Description:</Label><Label>{PropertyData.description}</Label><br/>
+      <br/>
+  </div>
+  </>
+ )
 };
 
 export default Description;

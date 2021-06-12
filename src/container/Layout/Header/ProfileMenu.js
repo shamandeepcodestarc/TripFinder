@@ -1,8 +1,9 @@
 import React, { useContext, useState, useRef } from 'react';
 import { Menu } from 'antd';
 import useOnClickOutside from 'library/hooks/useOnClickOutside';
-import { NavLink, withRouter } from 'react-router-dom';
+import { Link, NavLink, withRouter } from 'react-router-dom';
 import { AuthContext } from 'context/AuthProvider';
+import './stylemenu.css'
 import {
   AGENT_PROFILE_PAGE,
   AGENT_ACCOUNT_SETTINGS_PAGE,
@@ -32,6 +33,11 @@ const ProfileMenu = ({ avatar, history }) => {
     
       <div className="dropdown-handler" onClick={handleDropdown}>
         {avatar}
+        
+      </div>
+    
+      <div className="dropdown-handler" onClick={handleDropdown}>
+      <Link className="CartMenu" to="/Cart">Add To Cart</Link>
       </div>
 
       <Menu className={`dropdown-menu ${state ? 'active' : 'hide'}`}>

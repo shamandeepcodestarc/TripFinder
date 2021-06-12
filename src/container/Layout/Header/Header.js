@@ -73,8 +73,8 @@ export default withRouter(function Header({ location }) {
               </>
             }
             navMenu={<MainMenu />}
-            authMenu={<AuthMenu />}
             isLogin={IsLoggedIn}
+            authMenu={<AuthMenu />}
             avatar={<Logo src={avatarImg} />}
             profileMenu={<ProfileMenu avatar={<Logo src={avatarImg} />} />}
             headerType={headerType}
@@ -126,12 +126,12 @@ export default withRouter(function Header({ location }) {
                     <Text as="h3" content="Nova Scotia" />
                     <TextLink
                       link={AGENT_PROFILE_PAGE}
-                      content="View Profile"
+                      content = "View Profile"
                     />
                   </AvatarInfo>
                 </AvatarWrapper>
               ) : (
-                <AuthMenu className="auth-menu" />
+                 <AuthMenu className="auth-menu" />
               )}
               <MobileMenu className="main-menu" />
             </Drawer>

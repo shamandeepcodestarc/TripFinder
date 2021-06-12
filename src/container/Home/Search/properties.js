@@ -36,7 +36,7 @@ const Property = () => {
   }
   if (data && width >= 1200) {
     posts = data.slice(0, 10);
-    limit = 10;
+    limit = 50;
   }
   return (
    

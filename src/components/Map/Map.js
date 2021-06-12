@@ -9,7 +9,6 @@ const Map = (props) => {
   const handleClustererClick = (data) => {
     const markerClusterer = data.getMarkers();
     console.log(`Current clicked markers length: ${markerClusterer.length}`);
-    console.log(markerClusterer);
   };
 
   return (
